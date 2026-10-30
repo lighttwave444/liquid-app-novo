@@ -1,0 +1,6 @@
+{
+	"appId": "com.beruri.top1",
+	"appName": "top1",
+	"webDir": "public",
+	"bundledWebRuntime": false
+}
