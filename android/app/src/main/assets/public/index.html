@@ -1,0 +1,493 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Liquid v4.6</title><style>*{margin:0;padding:0;box-sizing:border-box;cursor:none!important}html,body{width:100vw;height:100dvh;overflow:hidden;position:fixed;left:0;top:0}body{background:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200') center/cover fixed;font-family:-apple-system,sans-serif;overscroll-behavior:none;touch-action:none}.glass{background:rgba(255,255,255,0.16);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.28);box-shadow:inset 0 1px 0 rgba(255,255,255,0.4),0 8px 32px rgba(0,0,0,0.25);border-radius:1.6rem;display:flex}.menu{position:fixed;top:10px;left:10px;flex-direction:column;padding:8px;gap:3px;z-index:50;max-width:62vw}.menu div{padding:10px 14px;border-radius:10px;color:#111;font-weight:600;font-size:13px;background:rgba(255,255,255,0.18)}.button{position:fixed;top:10px;right:10px;padding:10px 18px;z-index:50;color:#fff;font-weight:700;font-size:12px;background:rgba(255,255,255,0.18);backdrop-filter:blur(26px);border-radius:2rem;border:1px solid rgba(255,255,255,0.3)}.dock{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);width:96vw;max-width:400px;padding:10px 12px;gap:10px;justify-content:center;z-index:100;overflow:visible;background:rgba(255,255,255,0.16);backdrop-filter:blur(24px);border-radius:2rem;border:1px solid rgba(255,255,255,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.4);display:flex}.icon{width:54px;height:54px;min-width:54px;border-radius:50%;background:rgba(255,255,255,0.20);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,0.35);box-shadow:inset 0 1.5px 0 rgba(255,255,255,0.6),0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:transform 0.2s}.icon::before{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,0.5) 0%,transparent 100%);border-radius:50% 50% 0 0}.icon:active{transform:scale(0.88)}.icon span{position:relative;z-index:2;font-size:22px;color:rgba(255,255,255,0.95);text-shadow:0 1px 2px rgba(0,0,0,0.4);font-weight:600}#cursor{position:fixed;width:26px;height:34px;pointer-events:none;z-index:999999;left:0;top:0}.window{position:fixed;width:90vw;max-width:380px;height:340px;min-width:260px;min-height:200px;max-height:68vh;background:rgba(255,255,255,0.22);backdrop-filter:blur(26px);border-radius:16px;border:1px solid rgba(255,255,255,0.35);box-shadow:0 20px 60px rgba(0,0,0,0.4);z-index:90;display:none;flex-direction:column;overflow:hidden;touch-action:none}.window.active{display:flex}.header{height:42px;display:flex;align-items:center;padding:0 12px;gap:7px;background:rgba(0,0,0,0.06);flex-shrink:0;touch-action:none}.dot{width:12px;height:12px;border-radius:50%}.close{background:#ff5f57}.min{background:#ffbd2e}.max{background:#28ca42}.title{font-size:13px;font-weight:700;flex:1}.content{flex:1;overflow-y:auto;padding:14px;font-size:13px}.resize{position:absolute;right:0;bottom:0;width:44px;height:44px;z-index:20;touch-action:none;display:flex;align-items:flex-end;justify-content:flex-end;padding:8px}.resize::after{content:'';width:16px;height:16px;border-right:3px solid rgba(255,255,255,0.6);border-bottom:3px solid rgba(255,255,255,0.6);border-radius:0 0 4px 0}.hint{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:7px 14px;border-radius:20px;font-size:11px;z-index:40}.card{background:rgba(0,0,0,0.06);border-radius:12px;padding:12px;margin-bottom:10px}.btn{padding:8px 14px;border-radius:8px;border:none;background:#111;color:white;font-size:12px}.wall{height:58px;border-radius:10px;background-size:cover;background-position:center;border:2px solid transparent;position:relative}.wall.active{border-color:#fff}.wall span{position:absolute;bottom:2px;left:4px;background:rgba(0,0,0,0.6);color:white;font-size:10px;padding:1px 5px;border-radius:4px}</style>
+<style id="dark-liquid">
+/* VIDRO ESCURO LÍQUIDO - BEM LÍQUIDO */
+.glass, .window, .dock, .button, .icon, .menu div{
+  background:rgba(15,15,25,0.28) !important;
+  backdrop-filter:blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%) !important;
+  border:1px solid rgba(255,255,255,0.18) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    inset 0 -1px 0 rgba(0,0,0,0.2),
+    0 12px 40px rgba(0,0,0,0.4) !important;
+}
+.menu{
+  background:rgba(10,10,20,0.32) !important;
+  backdrop-filter:blur(30px) !important;
+  border-radius:1.4rem !important;
+}
+.menu div{
+  background:rgba(255,255,255,0.08) !important;
+  color:rgba(255,255,255,0.92) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,0.5) !important;
+  border:1px solid rgba(255,255,255,0.08) !important;
+}
+.menu div:active{
+  background:rgba(255,255,255,0.15) !important;
+}
+.dock{
+  background:rgba(12,12,22,0.35) !important;
+  backdrop-filter:blur(32px) saturate(180%) !important;
+  border:1px solid rgba(255,255,255,0.15) !important;
+  box-shadow:0 16px 48px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+.icon{
+  background:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 20%, rgba(15,15,25,0.4) 60%) !important;
+  backdrop-filter:blur(26px) !important;
+  border:1px solid rgba(255,255,255,0.20) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.35),
+    inset 0 -1px 0 rgba(0,0,0,0.3),
+    0 6px 20px rgba(0,0,0,0.4) !important;
+}
+.icon::before{
+  background:linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 60%) !important;
+}
+.icon span{
+  color:rgba(255,255,255,0.95) !important;
+  text-shadow:0 1px 3px rgba(0,0,0,0.6), 0 0 10px rgba(255,255,255,0.2) !important;
+  filter:none !important;
+}
+.window{
+  background:rgba(18,18,28,0.32) !important;
+  backdrop-filter:blur(32px) saturate(180%) !important;
+  border:1px solid rgba(255,255,255,0.18) !important;
+}
+.header{
+  background:rgba(0,0,0,0.15) !important;
+  border-bottom:1px solid rgba(255,255,255,0.08) !important;
+}
+.title, .content{
+  color:rgba(255,255,255,0.92) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,0.3) !important;
+}
+.card{
+  background:rgba(255,255,255,0.06) !important;
+  border:1px solid rgba(255,255,255,0.06) !important;
+}
+.button{
+  background:rgba(15,15,25,0.35) !important;
+  color:white !important;
+}
+.hint{
+  background:rgba(0,0,0,0.65) !important;
+  backdrop-filter:blur(12px) !important;
+  border:1px solid rgba(255,255,255,0.1) !important;
+}
+</style>
+
+<style id="fix-icons">
+.icon, #add-app-btn{
+  width:52px !important;
+  height:52px !important;
+  min-width:52px !important;
+  max-width:52px !important;
+  min-height:52px !important;
+  max-height:52px !important;
+  aspect-ratio:1 / 1 !important;
+  flex:0 0 52px !important;
+  flex-shrink:0 !important;
+  flex-grow:0 !important;
+  border-radius:50% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:0 !important;
+  box-sizing:border-box !important;
+}
+.dock{
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  overflow-x:auto !important;
+  overflow-y:hidden !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:10px !important;
+  padding:10px 14px !important;
+  scrollbar-width:none !important;
+}
+.dock::-webkit-scrollbar{display:none !important}
+.icon span{
+  line-height:1 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+}
+</style>
+</head><body><div class="glass menu"><div data-open="terminal">🖥️ Terminal</div><div data-open="config">⚙️ Configurações</div><div data-open="custom">🎨 Personalizado</div><div data-open="musica">🎵 Música</div></div><div class="button glass">top1 v5.2</div><div class="dock glass"><div class="icon" data-open="terminal"><span style="font-family:monospace;font-size:18px;font-weight:800">>_</span></div><div class="icon" data-open="config"><span>⚙️</span></div><div class="icon" data-open="custom"><span>🎨</span></div><div class="icon" data-open="musica"><span>♫</span></div><div class="icon" data-open="config"><span>📍</span></div><div class="icon" data-open="terminal"><span>📖</span></div><div id="add-app-btn" class="icon" data-open="addapp" style="background:rgba(255,255,255,0.08) !important;border:1px dashed rgba(255,255,255,0.25) !important"><span style="font-size:26px;font-weight:300">+</span></div></div><div class="hint">💡 2 toques pra abrir • Arraste topo • Puxe canto ↘</div><div id="win-terminal" class="window" style="top:12vh;left:5vw"><div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title">Terminal</div></div><div class="content"><b>beruri@liquid-v4.6:~$</b><br>✅ Ícones vidro top1<br>✅ Resize canto ↘ funcionando<br>✅ 2 toques</div><div class="resize"></div></div><div id="win-config" class="window" style="top:10vh;left:5vw;width:90vw;height:62vh"><div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title">⚙️ Configurações</div></div><div class="content"><b>📱 Apps</b><div class="card"><div style="display:flex;justify-content:space-between"><span>🖥️ Terminal</span><button class="btn" onclick="openWin('terminal')">Abrir</button></div></div><div class="card"><div style="display:flex;justify-content:space-between"><span>🎨 Personalizado</span><button class="btn" onclick="openWin('custom')">Abrir</button></div></div><div class="card"><div style="display:flex;justify-content:space-between"><span>🎵 Música</span><button class="btn" onclick="openWin('musica')">Abrir</button></div></div><b>🔧 Ajustes</b><div class="card"><div style="font-size:12px">Transparência: <span id="t-val">22%</span></div><input type="range" min="10" max="60" value="22" style="width:100%" oninput="document.getElementById('t-val').textContent=this.value+'%'; document.querySelectorAll('.window,.glass').forEach(w=>w.style.background='rgba(255,255,255,'+this.value/100+')')"></div></div><div class="resize"></div></div><div id="win-custom" class="window" style="top:9vh;left:5vw;height:65vh"><div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title">🎨 Personalizado</div></div><div class="content"><b>Papéis</b><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0"><div class="wall active" style="background-image:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200')" onclick="setWall(this,'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200')"><span>Floresta</span></div><div class="wall" style="background-image:url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=200')" onclick="setWall(this,'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200')"><span>Nevoeiro</span></div><div class="wall" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=200')" onclick="setWall(this,'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200')"><span>Montanha</span></div></div><b>Tema</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0"><button class="btn" style="background:rgba(255,255,255,0.8);color:#111" onclick="document.body.style.filter='none'">☀️ Claro</button><button class="btn" onclick="document.body.style.filter='brightness(0.75)'">🌙 Escuro</button></div></div><div class="resize"></div></div><div id="win-musica" class="window" style="top:14vh;left:5vw"><div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title">🎵 Música</div></div><div class="content"><b>Liquid Lo-Fi</b><br><br><div style="height:6px;background:rgba(0,0,0,0.1);border-radius:3px"><div style="width:38%;height:100%;background:#111;border-radius:3px"></div></div></div><div class="resize"></div></div>
+<div id="win-addapp" class="window" style="top:15vh;left:5vw;height:400px">
+  <div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title">➕ Adicionar App</div></div>
+  <div class="content">
+    <b>Criar novo aplicativo</b><br><br>
+    
+<div style="font-size:12px;margin-bottom:4px">App pronto (nativo do celular):</div>
+<select id="app-preset" onchange="criarAppNativo()" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.5);color:white;margin-bottom:10px">
+<option value="">-- Escolha um app do celular --</option>
+<option value="whatsapp">WhatsApp</option>
+<option value="youtube">YouTube (app)</option>
+<option value="instagram">Instagram</option>
+<option value="tiktok">TikTok</option>
+<option value="facebook">Facebook</option>
+<option value="camera">Câmera</option>
+<option value="galeria">Galeria</option>
+<option value="config">Configurações</option>
+<option value="telefone">Telefone</option>
+<option value="chrome">Chrome</option>
+</select>
+<div style="font-size:12px;margin-bottom:4px">Ou criar manual:</div>
+<div style="font-size:12px;margin-bottom:4px">Nome do App:</div>
+
+    <input id="app-name" type="text" placeholder="Ex: YouTube" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:white;margin-bottom:10px">
+    <div style="font-size:12px;margin-bottom:4px">Ícone (emoji):</div>
+    <input id="app-emoji" type="text" placeholder="Ex: ▶️ ou 🔥" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:white;margin-bottom:10px">
+    <div style="font-size:12px;margin-bottom:4px">Link ou ação:</div>
+    <input id="app-link" type="text" placeholder="Ex: https://youtube.com ou terminal" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:white;margin-bottom:14px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button class="btn" style="background:rgba(255,255,255,0.15)" onclick="document.getElementById('win-addapp').classList.remove('active')">Cancelar</button>
+      <button class="btn" style="background:white;color:black" onclick="criarApp()">Criar App</button>
+    </div>
+    <br>
+    <div style="font-size:11px;opacity:0.6">Dica: Se colocar link abre site. Se colocar 'terminal', 'config', 'custom' ou 'musica' abre a janela.</div>
+    <div id="apps-criados" style="margin-top:12px"></div>
+  </div>
+  <div class="resize"></div>
+</div>
+
+<script>
+function criarApp(){
+  let nome = document.getElementById('app-name').value || 'Novo App';
+  let emoji = document.getElementById('app-emoji').value || '✨';
+  let link = document.getElementById('app-link').value || '';
+  if(!nome) return;
+  
+  let dock = document.querySelector('.dock');
+  let icon = document.createElement('div');
+  icon.className = 'icon';
+  icon.innerHTML = '<span>'+emoji+'</span>';
+  icon.title = nome;
+  
+  if(link.startsWith('http')){
+    icon.onclick = () => window.open(link, '_blank');
+  } else if(['terminal','config','custom','musica','addapp'].includes(link)){
+    icon.setAttribute('data-open', link);
+    icon.addEventListener('click', function(e){
+      e.preventDefault();
+      let now=Date.now();
+      if(now-window.lastTap<380){ openWin(this.dataset.open); }
+      window.lastTap=now;
+    });
+  } else {
+    icon.onclick = () => alert('App: '+nome+'\nLink: '+link);
+  }
+  
+  // Insere antes do botão +
+  let addBtn = document.getElementById('add-app-btn');
+  dock.insertBefore(icon, addBtn);
+  
+  // Salva
+  let apps = JSON.parse(localStorage.getItem('beruri-apps')||'[]');
+  apps.push({nome, emoji, link});
+  localStorage.setItem('beruri-apps', JSON.stringify(apps));
+  
+  document.getElementById('app-name').value='';
+  document.getElementById('app-emoji').value='';
+  document.getElementById('app-link').value='';
+  document.getElementById('win-addapp').classList.remove('active');
+  
+  if(navigator.vibrate) navigator.vibrate(30);
+}
+
+function carregarApps(){
+  let apps = JSON.parse(localStorage.getItem('beruri-apps')||'[]');
+  let dock = document.querySelector('.dock');
+  let addBtn = document.getElementById('add-app-btn');
+  apps.forEach(a=>{
+    let icon = document.createElement('div');
+    icon.className='icon';
+    icon.innerHTML='<span>'+a.emoji+'</span>';
+    icon.title=a.nome;
+    if(a.link.startsWith('http')){
+      icon.onclick=()=>window.open(a.link,'_blank');
+    } else if(['terminal','config','custom','musica','addapp'].includes(a.link)){
+      icon.setAttribute('data-open', a.link);
+    } else {
+      icon.onclick=()=>alert('App: '+a.nome);
+    }
+    dock.insertBefore(icon, addBtn);
+  });
+}
+setTimeout(carregarApps, 500);
+</script>
+
+<div id="win-appview" class="window" style="top:8vh;left:2vw;width:96vw;max-width:96vw;height:78vh;max-height:78vh">
+  <div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title" id="appview-title">📱 App</div></div>
+  <div class="content" style="padding:0;overflow:hidden">
+    <iframe id="app-iframe" style="width:100%;height:100%;border:none;background:white;border-radius:0 0 16px 16px"></iframe>
+  </div>
+  <div class="resize"></div>
+</div>
+<script>
+function openAppInWindow(nome, link){
+  let win = document.getElementById('win-appview');
+  let iframe = document.getElementById('app-iframe');
+  let title = document.getElementById('appview-title');
+  title.textContent = '📱 ' + nome;
+  
+  if(link.startsWith('http')){
+    iframe.src = link;
+  } else if(['terminal','config','custom','musica','addapp'].includes(link)){
+    openWin(link);
+    return;
+  } else {
+    iframe.srcdoc = '<html><body style="font-family:sans-serif;padding:20px;background:#111;color:white"><h2>'+nome+'</h2><p>Link: '+link+'</p><p>Este app foi criado no top1 v5.2</p>
+<script>
+function carregarAppsReais(){
+  if(window.AndroidNative){
+    try{
+      let apps = JSON.parse(AndroidNative.getInstalledApps());
+      let dock = document.querySelector('.dock');
+      let addBtn = document.getElementById('add-app-btn');
+      apps.slice(0,15).forEach(app=>{
+        let icon = document.createElement('div');
+        icon.className='icon';
+        icon.innerHTML='<span>📱</span>';
+        icon.title=app.name;
+        icon.onclick=()=>{ 
+          if(AndroidNative.openApp) AndroidNative.openApp(app.package);
+          else window.location.href='intent://#Intent;package='+app.package+';end';
+        };
+        dock.insertBefore(icon, addBtn);
+      });
+      console.log('Carregados '+apps.length+' apps reais!');
+    }catch(e){ console.log('Erro nativo',e) }
+  }
+}
+setTimeout(carregarAppsReais,1500);
+</script>
+</body></html>';
+  }
+  
+  win.classList.add('active');
+  win.style.zIndex=9999;
+}
+
+let oldCriar = window.criarApp;
+window.criarApp = function(){
+  let nome = document.getElementById('app-name').value || 'Novo App';
+  let emoji = document.getElementById('app-emoji').value || '✨';
+  let link = document.getElementById('app-link').value || '';
+  if(!nome) return;
+  
+  let dock = document.querySelector('.dock');
+  let icon = document.createElement('div');
+  icon.className = 'icon';
+  icon.innerHTML = '<span>'+emoji+'</span>';
+  icon.title = nome;
+  
+  // AGORA ABRE DENTRO DA JANELA DE VIDRO
+  icon.onclick = () => openAppInWindow(nome, link);
+  
+  let addBtn = document.getElementById('add-app-btn');
+  dock.insertBefore(icon, addBtn);
+  
+  let apps = JSON.parse(localStorage.getItem('beruri-apps')||'[]');
+  apps.push({nome, emoji, link});
+  localStorage.setItem('beruri-apps', JSON.stringify(apps));
+  
+  document.getElementById('app-name').value='';
+  document.getElementById('app-emoji').value='';
+  document.getElementById('app-link').value='';
+  document.getElementById('win-addapp').classList.remove('active');
+  if(navigator.vibrate) navigator.vibrate(30);
+}
+</script>
+
+
+
+<div id="win-appview" class="window" style="top:6vh;left:1vw;width:98vw;max-width:98vw;height:82vh;max-height:82vh">
+  <div class="header"><div class="dot close"></div><div class="dot min"></div><div class="dot max"></div><div class="title" id="appview-title">📱 App</div></div>
+  <div id="appview-bar" style="display:none"></div>
+  <div class="content" style="padding:0;overflow:hidden;height:calc(100% - 42px)">
+    <iframe id="app-iframe" style="width:100%;height:100%;border:none;background:#111;border-radius:0 0 16px 16px"></iframe>
+  </div>
+  <div class="resize"></div>
+</div>
+
+<style id="appview-btn">
+#appview-bar{display:flex;gap:8px;padding:8px;background:rgba(0,0,0,0.4);align-items:center}
+#appview-bar button{padding:6px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.12);color:white;font-size:12px}
+#appview-bar button.primary{background:white;color:black}
+</style>
+<script>
+const WEB_VERSION = {
+  'com.whatsapp': 'https://web.whatsapp.com',
+  'com.google.android.youtube': 'https://m.youtube.com',
+  'com.instagram.android': 'https://www.instagram.com',
+  'com.zhiliaoapp.musically': 'https://www.tiktok.com',
+  'com.facebook.katana': 'https://m.facebook.com',
+  'com.android.chrome': 'https://www.google.com'
+};
+
+function getWebForIntent(intentLink){
+  for(let pkg in WEB_VERSION){
+    if(intentLink.includes(pkg)) return WEB_VERSION[pkg];
+  }
+  if(intentLink.includes('IMAGE_CAPTURE')) return null;
+  if(intentLink.includes('SETTINGS')) return null;
+  if(intentLink.startsWith('tel:')) return null;
+  return null;
+}
+
+function openAppInWindow(nome, link){
+  let win = document.getElementById('win-appview');
+  let iframe = document.getElementById('app-iframe');
+  let title = document.getElementById('appview-title');
+  let bar = document.getElementById('appview-bar');
+  
+  title.textContent = '📱 ' + nome;
+  win.classList.add('active');
+  win.style.zIndex=9999;
+  
+  // Se for intent, mostra web dentro + botão abrir app
+  if(link.startsWith('intent://') || link.startsWith('tel:')){
+    let web = getWebForIntent(link);
+    bar.style.display='flex';
+    bar.innerHTML = `<span style="flex:1;font-size:12px;opacity:0.7">${nome} • dentro da janela top1</span>
+      <button onclick="window.location.href='${link}'">Abrir no App</button>
+      <button class="primary" onclick="document.getElementById('win-appview').classList.remove('active')">Fechar</button>`;
+    
+    if(web){
+      iframe.src = web;
+    } else if(link.startsWith('tel:')){
+      iframe.srcdoc = `<html><body style="background:#111;color:white;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;flex-direction:column"><h2>📞 ${nome}</h2><a href="${link}" style="padding:12px 24px;background:white;color:black;border-radius:20px;text-decoration:none">Ligar agora</a>
+<script>
+function carregarAppsReais(){
+  if(window.AndroidNative){
+    try{
+      let apps = JSON.parse(AndroidNative.getInstalledApps());
+      let dock = document.querySelector('.dock');
+      let addBtn = document.getElementById('add-app-btn');
+      apps.slice(0,15).forEach(app=>{
+        let icon = document.createElement('div');
+        icon.className='icon';
+        icon.innerHTML='<span>📱</span>';
+        icon.title=app.name;
+        icon.onclick=()=>{ 
+          if(AndroidNative.openApp) AndroidNative.openApp(app.package);
+          else window.location.href='intent://#Intent;package='+app.package+';end';
+        };
+        dock.insertBefore(icon, addBtn);
+      });
+      console.log('Carregados '+apps.length+' apps reais!');
+    }catch(e){ console.log('Erro nativo',e) }
+  }
+}
+setTimeout(carregarAppsReais,1500);
+</script>
+</body></html>`;
+    } else {
+      iframe.srcdoc = `<html><body style="background:#111;color:white;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;flex-direction:column"><h2>${nome}</h2><p>App nativo do sistema</p><a href="${link}" style="padding:12px 24px;background:white;color:black;border-radius:20px;text-decoration:none;margin-top:10px">Abrir ${nome}</a>
+<script>
+function carregarAppsReais(){
+  if(window.AndroidNative){
+    try{
+      let apps = JSON.parse(AndroidNative.getInstalledApps());
+      let dock = document.querySelector('.dock');
+      let addBtn = document.getElementById('add-app-btn');
+      apps.slice(0,15).forEach(app=>{
+        let icon = document.createElement('div');
+        icon.className='icon';
+        icon.innerHTML='<span>📱</span>';
+        icon.title=app.name;
+        icon.onclick=()=>{ 
+          if(AndroidNative.openApp) AndroidNative.openApp(app.package);
+          else window.location.href='intent://#Intent;package='+app.package+';end';
+        };
+        dock.insertBefore(icon, addBtn);
+      });
+      console.log('Carregados '+apps.length+' apps reais!');
+    }catch(e){ console.log('Erro nativo',e) }
+  }
+}
+setTimeout(carregarAppsReais,1500);
+</script>
+</body></html>`;
+    }
+    return;
+  }
+  
+  // Se for http normal
+  bar.style.display='flex';
+  bar.innerHTML = `<span style="flex:1;font-size:12px;opacity:0.7">${nome}</span><button onclick="window.open('${link}','_blank')">Abrir fora</button><button class="primary" onclick="document.getElementById('win-appview').classList.remove('active')">Fechar</button>`;
+  iframe.src = link;
+}
+
+// Reescreve tudo para sempre usar janela
+window.criarApp = function(){
+  let nome = document.getElementById('app-name').value || 'Novo App';
+  let emoji = document.getElementById('app-emoji').value || '✨';
+  let link = document.getElementById('app-link').value || '';
+  if(!nome) return;
+  
+  let dock = document.querySelector('.dock');
+  let icon = document.createElement('div');
+  icon.className = 'icon';
+  icon.innerHTML = '<span>'+emoji+'</span>';
+  icon.title = nome;
+  icon.onclick = () => openAppInWindow(nome, link);
+  
+  let addBtn = document.getElementById('add-app-btn');
+  dock.insertBefore(icon, addBtn);
+  
+  let apps = JSON.parse(localStorage.getItem('beruri-apps')||'[]');
+  apps.push({nome, emoji, link});
+  localStorage.setItem('beruri-apps', JSON.stringify(apps));
+  
+  document.getElementById('app-name').value='';
+  document.getElementById('app-emoji').value='';
+  document.getElementById('app-link').value='';
+  document.getElementById('win-addapp').classList.remove('active');
+  if(navigator.vibrate) navigator.vibrate(30);
+}
+
+// Corrige apps antigos salvos
+setTimeout(()=>{
+  let icons = document.querySelectorAll('.dock .icon:not(#add-app-btn)');
+  let apps = JSON.parse(localStorage.getItem('beruri-apps')||'[]');
+  icons.forEach((ic,i)=>{
+    if(apps[i]){
+      ic.onclick = () => openAppInWindow(apps[i].nome, apps[i].link);
+    }
+  });
+},1000);
+</script>
+<div id="appview-bar" style="display:none"></div>
+
+<div id="cursor"><svg viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg"><path d="M2 2 L2 24 L7 18 L10 26 L13 24.5 L9.5 16.5 L16 16 L2 2 Z" fill="white" stroke="black" stroke-width="1.3"/></svg></div><script>const cur=document.getElementById('cursor');let cx=0,cy=0,tx=innerWidth/2,ty=innerHeight/2;function mv(e){let p=e.touches?e.touches[0]:e;tx=p.clientX;ty=p.clientY}function anim(){cx+=(tx-cx)*0.22;cy+=(ty-cy)*0.22;cur.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(anim)}anim();addEventListener('mousemove',mv);addEventListener('touchmove',mv,{passive:true});addEventListener('touchstart',mv,{passive:true});function setWall(el,url){document.querySelectorAll('.wall').forEach(w=>w.classList.remove('active'));el.classList.add('active');document.body.style.background="url('"+url+"') center/cover fixed";document.body.style.filter='none'}function openWin(id){let w=document.getElementById('win-'+id);if(w){w.classList.add('active');w.style.zIndex=Date.now()%10000+100}}let lastTap=0;document.querySelectorAll('[data-open]').forEach(el=>{let fn=(e)=>{e.preventDefault();let now=Date.now();if(now-lastTap<380){openWin(el.dataset.open);if(navigator.vibrate)navigator.vibrate(20)}lastTap=now};el.addEventListener('click',fn);el.addEventListener('touchend',fn)});document.querySelectorAll('.dot.close').forEach(d=>{let c=()=>{d.closest('.window').classList.remove('active')};d.addEventListener('click',c);d.addEventListener('touchend',e=>{e.preventDefault();c()})});document.querySelectorAll('.window').forEach(win=>{let h=win.querySelector('.header');let r=win.querySelector('.resize');h.addEventListener('pointerdown',e=>{if(e.target.closest('.dot'))return;let sx=e.clientX,sy=e.clientY,ox=win.offsetLeft,oy=win.offsetTop;h.setPointerCapture(e.pointerId);let move=(ev)=>{win.style.left=Math.max(0,Math.min(innerWidth-win.offsetWidth,ox+ev.clientX-sx))+'px';win.style.top=Math.max(0,Math.min(innerHeight-win.offsetHeight,oy+ev.clientY-sy))+'px'};let up=()=>{h.removeEventListener('pointermove',move)};h.addEventListener('pointermove',move);h.addEventListener('pointerup',up,{once:true})});r.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();let sx=e.clientX,sy=e.clientY,sw=win.offsetWidth,sh=win.offsetHeight;r.setPointerCapture(e.pointerId);win.style.zIndex=9999;let move=(ev)=>{let nw=Math.max(260,Math.min(innerWidth*0.94,sw+(ev.clientX-sx)));let nh=Math.max(200,Math.min(innerHeight*0.75,sh+(ev.clientY-sy)));win.style.width=nw+'px';win.style.height=nh+'px'};let up=()=>{r.removeEventListener('pointermove',move);win.style.zIndex=90};r.addEventListener('pointermove',move);r.addEventListener('pointerup',up,{once:true})})});document.addEventListener('touchmove',e=>{if(e.touches.length>1&&!e.target.closest('.window'))e.preventDefault()},{passive:false});</script>
+<script>
+function carregarAppsReais(){
+  if(window.AndroidNative){
+    try{
+      let apps = JSON.parse(AndroidNative.getInstalledApps());
+      let dock = document.querySelector('.dock');
+      let addBtn = document.getElementById('add-app-btn');
+      apps.slice(0,15).forEach(app=>{
+        let icon = document.createElement('div');
+        icon.className='icon';
+        icon.innerHTML='<span>📱</span>';
+        icon.title=app.name;
+        icon.onclick=()=>{ 
+          if(AndroidNative.openApp) AndroidNative.openApp(app.package);
+          else window.location.href='intent://#Intent;package='+app.package+';end';
+        };
+        dock.insertBefore(icon, addBtn);
+      });
+      console.log('Carregados '+apps.length+' apps reais!');
+    }catch(e){ console.log('Erro nativo',e) }
+  }
+}
+setTimeout(carregarAppsReais,1500);
+</script>
+</body></html>
