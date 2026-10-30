@@ -1,4 +1,4 @@
-name: Build Android APK Melhorado
+name: Build Android APK Diagnóstico
 
 on:
   push:
@@ -18,13 +18,26 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Instalar dependências
-        run: npm install
+      - name: Instalar dependências e CLI
+        run: |
+          npm install
+          npm install -g @capacitor/cli
 
-      - name: Verificar pasta public
-        run: ls -la public
+      - name: Diagnóstico completo (não para se falhar)
+        run: |
+          echo "=== Raiz do projeto ==="
+          ls -la
+          echo "=== Pasta public ==="
+          ls -la public || echo "❌ public não encontrado"
+          echo "=== capacitor.config.json ==="
+          cat capacitor.config.json || echo "❌ config não encontrado"
+          echo "=== package.json ==="
+          cat package.json
 
-      - name: Sincronizar Capacitor Android
+      - name: Adicionar Android
+        run: npx cap add android
+
+      - name: Sincronizar Capacitor
         run: npx cap sync android
 
       - name: Setup JDK 17
