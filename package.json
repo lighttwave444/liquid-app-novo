@@ -1,0 +1,25 @@
+{
+  "name": "liquid-desktop-apk",
+  "version": "1.0.0",
+  "description": "> [!NOTE] > Demo here: https://codesandbox.io/p/sandbox/nn5q2y",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasromerodb/liquid-glass-effect-macos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lucasromerodb/liquid-glass-effect-macos/issues"
+  },
+  "homepage": "https://github.com/lucasromerodb/liquid-glass-effect-macos#readme",
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/core": "^8.5.3"
+  }
+}
